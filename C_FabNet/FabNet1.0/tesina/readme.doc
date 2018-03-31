@@ -1,0 +1,20 @@
+NOTA PER LA CONSULTAZIONE DELLA TESINA FABNET - NETWORK SIMULATOR
+  
+  Per consultare la tesina riguardante il simulatore dei protocolli
+di accesso al mezzo fisico Token Bus, Token Ring ed FDDI Š
+necessario porre il file TESINA.EXE (autoscompattante e contenente
+i 7 file di testo, tabelle e grafici per Works 3 per Windows,
+o programma compatibile) nella directory C:\MSWORKS
+(se non esistente occorre crearla), ed eseguirlo.
+  I file sono:
+        FABNET.WPS      Testo della tesina (97 pagine)
+
+        TEOBUS.WKS      Simulazione teorica - Token Bus
+        TEORING.WKS     Simulazione teorica - Token Ring
+        TEOFDDI.WKS     Simulazione teorica - FDDI
+
+        REABUS.WKS      Simulazione reale - Token Bus
+        REARING.WKS     Simulazione reale - Token Ring
+        REAFDDI.WKS     Simulazione reale - FDDI
+  Dopo avere lanciato TESINA.EXE, baster… caricare il file FABNET.WPS
+da un word-processor Works 3 per Windows o simile.

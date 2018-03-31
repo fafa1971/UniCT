@@ -1,0 +1,174 @@
+
+
+
+                     PROBLEMA N.2  -  DECENTRALIZZAZIONE
+
+           Gruppo n.8  ( Fabrizio Fazzino & Rosario Costanzo )
+
+
+        Una compagnia inglese Š composta da 5 dipartimenti, tutti
+        situati a Londra. A causa delle gravose tariffe degli affitti
+        e dei salari, e anche per alcuni incentivi governativi, si
+        decide di spostare alcuni o tutti i dipartimenti da Londra a
+        Bristol o a Brighton, con un massimo di 3 dipartimenti che
+        possono coesistere nella stessa citt… (Londra inclusa, quindi
+        Š evidente che almeno 2 rilocazioni sono obbligatorie).
+        
+        Ad ogni rilocazione corrispondono quindi dei benefici, come
+        indicato nella seguente tabella in cui ad ogni elemento Bij
+        corrisponde il vantaggio derivante dalla rilocazione del
+        dipartimento j nella citt… i (ovviamente la riga corrispondente
+        alla citt… di Londra Š composta da tutti zeri perch‚ si
+        mantiene la situazione invariata); tutti i benefici della
+        tabella sono espressi in Kilopound/anno:
+
+                ÚÄÄÄÄÄÄÄÄÄÄÂÄÄÄÄÄÂÄÄÄÄÄÂÄÄÄÄÄÂÄÄÄÄÄÂÄÄÄÄÄ¿
+                ³  Citt…   ³Dip.1³Dip.2³Dip.3³Dip.4³Dip.5³
+                ÃÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÅÄÄÄÄÄÅÄÄÄÄÄÅÄÄÄÄÄÅÄÄÄÄÄ´
+                ³1=Bristol ³ 10  ³ 15  ³ 10  ³ 20  ³  5  ³ 
+                ³2=Brighton³ 10  ³ 20  ³ 15  ³ 15  ³ 15  ³
+                ³3=Londra  ³  0  ³  0  ³  0  ³  0  ³  0  ³
+                ÀÄÄÄÄÄÄÄÄÄÄÁÄÄÄÄÄÁÄÄÄÄÄÁÄÄÄÄÄÁÄÄÄÄÄÁÄÄÄÄÄÙ
+
+        Purtroppo ad ogni rilocazione corrispondono anche degli
+        svantaggi, in quanto i vari dipartimenti hanno necessit…
+        di comunicare tra loro, e se sono posti in citt… differenti
+        il costo della comunicazione non Š nullo.
+
+        Allora i costi aggiuntivi derivanti dalle rilocazioni saranno
+        espressi nella forma Cjl*Dik, dove i termini Cjl e Dik, 
+        specificati nelle seguenti tabelle, indicano rispettivamente
+        la quantit… annuale di comunicazione tra i dipartimenti j e l,
+        ed il costo per unit… di comunicazione tra le citt… i e k.
+
+        I termini Cjl si ricavano dunque dalla seguente tabella
+        (la corrispondenza Š dipartimenti-dipartimenti):
+        
+                ÚÄÄÄÄÄÄÂÄÄÄÄÄÂÄÄÄÄÄÂÄÄÄÄÄÂÄÄÄÄÄÂÄÄÄÄÄ¿
+                ³Dip.n.³Dip.1³Dip.2³Dip.3³Dip.4³Dip.5³
+                ÃÄÄÄÄÄÄÅÄÄÄÄÄÅÄÄÄÄÄÅÄÄÄÄÄÅÄÄÄÄÄÅÄÄÄÄÄ´
+                ³   1  ³  0  ³  0  ³  1  ³ 1.5 ³  0  ³ 
+                ³   2  ³  0  ³  0  ³ 1.4 ³ 1.2 ³  0  ³         
+                ³   3  ³  0  ³  0  ³  0  ³  0  ³  2  ³
+                ³   4  ³  0  ³  0  ³  0  ³  0  ³ 0.7 ³
+                ³   5  ³  0  ³  0  ³  0  ³  0  ³  0  ³
+                ÀÄÄÄÄÄÄÁÄÄÄÄÄÁÄÄÄÄÄÁÄÄÄÄÄÁÄÄÄÄÄÁÄÄÄÄÄÙ
+
+        Come si pu• notare, la tabella costituisce una matrice
+        triangolare superiore, in quanto ogni comunicazione tra ogni
+        coppia di dipartimenti viene considerata solo in un senso.
+
+        Invece i termini Dik si ricavano dalla tabella citt…-citt…:
+
+                ÚÄÄÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄ¿
+                ³  Citt…   ³Bristol³Brighton³Londra³
+                ÃÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄ´
+                ³1=Bristol ³   5   ³   14   ³  13  ³ 
+                ³2=Brighton³   0   ³    5   ³   9  ³
+                ³3=Londra  ³   0   ³    0   ³  10  ³
+                ÀÄÄÄÄÄÄÄÄÄÄÁÄÄÄÄÄÄÄÁÄÄÄÄÄÄÄÄÁÄÄÄÄÄÄÙ
+
+        Anche la matrice dei termini Dik, come gi… quella dei termini
+        Cjl, Š una matrice triangolare superiore.
+        Anzi, per essere precisi, ognuna delle due matrici presenta
+        soltanto 6 termini non nulli, e questo restringe il numero
+        delle combinazioni Cjl*Dik da 5*5*3*3=225 a sole 6*6=36, e
+        questo ci torner… molto utile nel seguito per un appropriato
+        dimensionamento del problema.
+
+
+                             MODELLIZZAZIONE
+
+        Variabili Decisionali:
+                Occorre innanzitutto scegliere 15 variabili booleane 
+                della seguente forma:
+
+                        Xij             i=1..3 (citt…), j=1..5 (dipart.)
+
+                dove Xij=1 solo se la citt… i ospita il dipartimento j,
+                e vale zero negli altri casi.
+
+                Sono inoltre necessarie delle altre variabili con 4
+                indici che consentano di considerare nella funzione
+                obiettivo il termine Cjl*Dik solo se effettivamente
+                i dipartimenti j ed l sono effettivamente dislocati
+                nelle citt… i e k.
+                Si definiscono allora delle ulteriori variabili
+                booleane:
+
+                        Yijkl           i,k=1..3  ,  j=1..5  
+
+                dove Yijkl=1 solo se Xij=1 e Xkl=1, mentre Š Yijkl=0
+                in tutti gli altri casi.
+
+                Da notare che una formulazione completa del problema
+                richiederebbe ben 225 variabili Yijkl, con una esplosione
+                anche del numero dei vincoli.
+                Invece, come visto in precedenza, grazie alla particolare 
+                configurazione delle matrici C e D, il numero di queste
+                variabili Yijkl pu• essere ridotto a 36, avendo cura di
+                definire solo le variabili con gli indici corrispondenti
+                agli unici elementi non nulli delle matrici Cjl e Dik,
+                cio‚ con indici appartenti alle seguenti coppie:
+
+                   (j,l) = { (1,3),(1,4),(2,3),(2,4),(3,5),(4,5) }
+
+                   (i,k) = { (1,1),(1,2),(1,3),(2,2),(2,3),(3,3) }
+
+                Dalle 36 combinazioni derivanti per i quattro indici
+                si ottengono dunque altrettante variabili Yijkl, che
+                sommate alle 15 variabili originarie Xij forniscono
+                un problema di ottimizzazione lineare con 51 variabili
+                booleane.
+
+        Funzione Obiettivo:
+                Obiettivo del nostro problema Š la massimizzazione del
+                profitto derivante dalle rilocazioni, dato dalla
+                differenza tra i benefici e i nuovi costi di
+                comunicazione:
+
+            f = SUMi SUMj(Xij*Bij) - SUMi SUMj SUMk SUMl(Yijkl*Cjl*Dik)
+
+                dove ovviamente i,k=1..3 (citt…) e j,l=1..5 (dipart.).
+
+        Vincoli:Il primo vincolo da imporre Š quello logico secondo
+                cui ogni dipartimento pu• stare solo in una citt…:
+
+                        SUMi(Xij) = 1           i=1..3,j=1..5
+
+                Un altro vincolo viene imposto dalle richieste della
+                compagnia, secondo cui ogni citt… pu• ospitare al
+                massimo tre dipartimenti:
+
+                        SUMj(Xij) <= 3          i=1..3,j=1..5
+
+                Finora abbiamo scritto solo 8 vincoli, e avremmo finito
+                se fosse possibile dire al solutore qualcosa che in un
+                linguaggio di programmazione di alto livello potrebbe
+                suonare all'incirca cos:
+
+                        if(Xij=1 and Xkl=1)
+                            Yijkl=1;
+                        else 
+                            Yijkl=0;
+
+                Purtroppo per• non Š possibile dire al solutore nulla
+                di simile, per cui bisogna operare in un modo alquanto
+                "primitivo" e fornire al solutore i seguenti 3*36=108
+                vincoli:
+
+                        Yijkl  >=  Xij + Xkl - 1
+
+                        Yijkl  <=  Xij
+
+                        Yijkl  <=  Xkl
+
+                Ovviamente devo prendere soltanto le Yijkl i cui indici
+                appartengano agli insiemi enumerativi definiti in 
+                precedenza, e fare corrispondere gli equivalenti indici
+                nei termini Xij e Xkl.
+
+
+        In definitiva il presente problema di ottimizzazione lineare
+        pu• dunque essere modellizzato mediante l'utilizzo di 51 variabili
+        decisionali booleane e 116 vincoli.

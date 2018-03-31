@@ -1,0 +1,18 @@
+                        
+                        RUST DETECTOR per Matlab 4.2b
+      Individuatore di ruggine per l'ispezione di impianti industriali.
+
+        Per installare il programma bisogna copiare su una directory
+        dell'hard disk il file autoscompattante RUGGINE.EXE e lanciarlo.
+        Verranno automaticamente estratti i file che compongono il
+        programma; per eseguirlo digitare 'rshow' in ambiente Matlab
+        posizionandosi nella directory opportuna.
+
+        NOTA: E' necessario disporre di una scheda audio.
+              In alternativa si pu• utilizzare l'emulatore
+              'Sound Driver for PC Speaker' presente sul
+              dischetto in A:\SPEAKER\SPEAK.EXE : il file
+              Š anch'esso autoscompattante e genera i file
+              necessari all'installazione dal Pannello di 
+              Controllo di Windows.
+

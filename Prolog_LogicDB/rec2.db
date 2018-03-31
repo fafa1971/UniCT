@@ -1,0 +1,5 @@
+record(["montedison","prodotti chimici","1200"])
+record(["olivetti","computer","3500"])
+record(["ibm","computer","5000"])
+attributi(["Ditta","Merce","NumDipendenti"])
+nome("rec2.db")

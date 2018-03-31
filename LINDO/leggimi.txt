@@ -1,0 +1,9 @@
+LINDO (Linear, Interactive, and Discrete Optimizer) - www.lindo.com
+
+Tesine Gruppo n.8  ( Fabrizio Fazzino & Rosario Costanzo )
+
+PROBLEMA N.1  -  STOCCAGGIO MULTIPERIODO
+PROBLEMA N.2  -  DECENTRALIZZAZIONE
+PROBLEMA N.3  -  BLENDING DI CARBONE
+PROBLEMA N.4  -  COPERTURA DI INSIEMI
+

@@ -1,0 +1,237 @@
+
+
+
+                  PROBLEMA N.1  -  STOCCAGGIO MULTIPERIODO
+               
+            Gruppo n.8  ( Fabrizio Fazzino & Rosario Costanzo )
+
+
+        Un industriale produce dei motori e periodicamente li rivende 
+        ad un altro imprenditore; gli operai alle dipendenze dell'
+        industriale lavorano un certo numero di giorni diverso per 
+        ogni settimana dell'anno, e alla fine di ogni settimana 
+        l'industriale spedisce all'imprenditore la quantit… di 
+        motori richiesta, mentre eventuali eccedenze devono essere 
+        riposte in appositi magazzini.
+                  
+        Il costo unitario di stoccaggio per l'imprenditore Š costante 
+        nell'arco dell'anno ed Š proporzionale alla quantit… di merce 
+        immagazzinata; obiettivo del nostro problema di ottimizzazione 
+        Š proprio individuare la quantit… di motori da produrre ogni
+        settimana per minimizzare i costi di stoccaggio.
+        
+        I primi dati di cui necessitiamo sono i giorni lavorativi per 
+        ogni settimana dell'anno ( Ai con i=1..51 ) e le consegne 
+        settimanali richieste dall'imprenditore con cui si Š stipulato 
+        il contratto ( Bi con i=1..51 ); come si pu• inoltre vedere, 
+        le settimane sono tra loro raggruppate in 7 periodi che 
+        serviranno per fissare gli opportuni vincoli richiesti dal 
+        problema (solo il primo periodo Š costituito da una sola 
+        settimana):
+                  
+        ÚÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄ¿
+        ³Sett.(i)³G.Lav.(Ai)³Rich.(Bi)³
+        ÃÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄ´ ÃÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄ´
+        ³    1   ³     2    ³     9   ³ ³   27   ³     5    ³    20   ³
+        ÃÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄ´ ³   28   ³     5    ³    12   ³
+        ³    2   ³     5    ³     7   ³ ³   29   ³     4    ³    13   ³  
+        ³    3   ³     5    ³    11   ³ ³   30   ³     5    ³    10   ³  
+        ³    4   ³     5    ³     9   ³ ³   31   ³     5    ³     0   ³  
+        ³    5   ³     5    ³     0   ³ ³   32   ³     5    ³    15   ³  
+        ³    6   ³     5    ³     5   ³ ³   33   ³     4    ³    17   ³  
+        ³    7   ³     5    ³     7   ³ ³   34   ³     5    ³    20   ³  
+        ³    8   ³     5    ³     9   ³ ÃÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄ´     
+        ³    9   ³     5    ³    11   ³ ³   35   ³     5    ³    19   ³  
+        ÃÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄ´ ³   36   ³     5    ³    20   ³  
+        ³   10   ³     5    ³    14   ³ ³   37   ³     5    ³    20   ³  
+        ³   11   ³     5    ³    10   ³ ³   38   ³     5    ³    23   ³  
+        ³   12   ³     5    ³     9   ³ ³   39   ³     5    ³    24   ³  
+        ³   13   ³     5    ³    19   ³ ³   40   ³     5    ³    22   ³  
+        ³   14   ³     5    ³    12   ³ ³   41   ³     5    ³    21   ³  
+        ³   15   ³     5    ³    11   ³ ³   42   ³     5    ³    24   ³  
+        ³   16   ³     5    ³    10   ³ ÃÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄ´   
+        ³   17   ³     5    ³     6   ³ ³   43   ³     5    ³    22   ³  
+        ÃÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄ´ ³   44   ³     5    ³    19   ³  
+        ³   18   ³     4    ³    18   ³ ³   45   ³     5    ³    22   ³  
+        ³   19   ³     3    ³    13   ³ ³   46   ³     4    ³    25   ³  
+        ³   20   ³     5    ³    13   ³ ³   47   ³     5    ³    39   ³  
+        ³   21   ³     4    ³    14   ³ ³   48   ³     5    ³    33   ³  
+        ³   22   ³     5    ³    11   ³ ³   49   ³     5    ³    16   ³  
+        ³   23   ³     5    ³    15   ³ ³   50   ³     5    ³    17   ³  
+        ³   24   ³     5    ³    11   ³ ³   51   ³     5    ³    14   ³    
+        ³   25   ³     5    ³    24   ³ ÀÄÄÄÄÄÄÄÄÁÄÄÄÄÄÄÄÄÄÄÁÄÄÄÄÄÄÄÄÄÙ
+        ³   26   ³     5    ³    22   ³        
+        ÃÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄ´  
+
+        In realt… il problema si compone di tre problemi distinti,
+        ognuno dei quali deve essere risolto separatamente; infatti
+        in ogni caso si richiede che venga minimizzato il costo
+        complessivo annuo di stoccaggio rispettando le consegne
+        promesse all'imprenditore.
+        
+        Invece in base agli altri vincoli il problema va diviso in
+        3 problemi indipendenti, per i quali bisogna prima specificare
+        che per Tasso di Produzione si intende la quantit… di motori
+        prodotti in ogni settimana rapportati al numero di giornate
+        lavorative nella settimana stessa.
+
+        Si chiede dunque di risolvere i seguenti 3 problemi:
+
+     I) Si richiede un tasso di produzione costante all'interno di
+        ogni periodo, e che il tasso di produzione nel periodo estivo
+        non superi il 60% del tasso medio delle 12 settimane ad esso 
+        precedenti.
+
+    II) Si richiede un tasso di produzione costante solo nel periodo
+        estivo, e inoltre che il tasso di produzione di ogni singola 
+        settimana non vari pi— del ñ5% rispetto alla media (sconosciuta) 
+        di tutto l'anno.
+
+   III) Si richiede un tasso di produzione costante nel periodo estivo,
+        e che il tasso di produzione di ogni singola settimana non
+        varii pi— del ñ5% rispetto alla media (sconosciuta) del proprio
+        periodo.
+                
+
+                            MODELLIZZAZIONE
+
+        Per la modellizzazione si adopereranno i termini Ai e Bi
+        della tabella vista in precedenza, e si user… inoltre la
+        convenzione, come suggerito dal testo del problema, di
+        indicare con indice l=1..7 i periodi con cui le settimane
+        sono raggruppate, e all'interno di ognuno di questi periodi
+        sar… indicata con "ml" la prima settimana del periodo e con 
+        "Ml" l'ultima settimana dello stesso.
+
+        Variabili Decisionali:
+                Si Š rivelato necessario definire 102 variabili, cio‚
+                una coppia di variabili per ognuna delle 51 settimane
+                che compongono l'anno.
+
+                In particolare si sono definite le seguenti variabili 
+                reali non negative:
+                        Pi (produzione)         i=1..51
+                        Xi (giacenza)           i=1..51
+
+                Come Š evidente, le Pi rappresentano le quantit… di
+                motori che l'industriale deve far produrre per ogni
+                settimana, mentre le Xi rappresentano i residui di 
+                magazzino per ogni settimana.
+
+                In realt… bisognerebbe considerare anche una scorta
+                iniziale X0 con cui l'industriale inizia la produzione,
+                ma nel caso in esame vale X0 = 0.
+
+        Funzione Obiettivo:
+                L'obiettivo del problema di ottimizzazione lineare
+                Š la minimizzazione della somma delle scorte di magazzino
+                di tutte le settimane nel corso dell'anno:
+                        f = SUMi(Xi)            i=1..51
+
+        Vincoli: L'unico vincolo che vale per tutti e tre i problemi
+                in esame rappresenta il bilancio tra quanto viene
+                prodotto, quanto viene venduto e le scorte di magazzino
+                precedenti e attuali:
+                        Pi + X(i-1) - Xi = Bi           i=1..51
+
+                Invece per gli altri vincoli bisogna scendere nel
+                dettaglio dei tre problemi.
+
+
+                                PROBLEMA 1
+
+        Bisogna imporre il tasso di produzione costante all'interno di
+        ogni periodo:
+
+            Pi     P(i+1)                 l=2..7
+           ÄÄÄÄ - ÄÄÄÄÄÄÄÄ  = 0
+            Ai     A(i+1)                 i=ml..Ml-1
+
+        Inoltre il tasso di produzione estivo (cio‚ delle settimane 
+        27..34) non deve superare il 60% del tasso di produzione delle
+        12 settimane ad esso precedenti (cio‚ 15..26):
+
+           34              26
+            ä  Pi           ä  Pi
+          i=27            i=15
+          ÄÄÄÄÄÄÄÄ  - 0.6 ÄÄÄÄÄÄÄÄ  <= 0
+           34              26
+            ä  Ai           ä  Ai
+          i=27            i=15
+
+
+                                PROBLEMA 2
+
+        Devo ora imporre che il tasso di produzione sia costante, non
+        in tutti i periodi come nel caso precedente ma solo tra le varie
+        settimane che appartengono al periodo estivo:
+
+            Pi     P(i+1)                 
+           ÄÄÄÄ - ÄÄÄÄÄÄÄÄ  = 0           i=27..33
+            Ai     A(i+1)                 
+
+        Inoltre il tasso di produzione di ogni singola settimana non
+        pu• variare in valore assoluto pi— del 5% rispetto al tasso
+        medio di tutto l'anno:
+
+              ³         51       ³
+              ³          ä Pi    ³
+              ³  Pj    i=1       ³
+              ³ ÄÄÄÄ - ÄÄÄÄÄÄÄÄ  ³
+              ³  Aj      51      ³
+              ³           ä Ai   ³
+              ³         i=1      ³
+              ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ  <= 0.05          j=1..51
+                      51
+                       ä Pi
+                     i=1
+                    ÄÄÄÄÄÄÄÄ          
+                      51
+                       ä Ai
+                     i=1
+
+
+                                PROBLEMA 3
+
+        Devo ora imporre come poco fa che il tasso di produzione sia 
+        costante tra le varie settimane che appartengono al periodo 
+        estivo:
+
+            Pi     P(i+1)                 
+           ÄÄÄÄ - ÄÄÄÄÄÄÄÄ  = 0           i=27..33
+            Ai     A(i+1)                 
+
+        Inoltre il tasso di produzione di ogni singola settimana non
+        pu• variare in valore assoluto pi— del 5% rispetto al tasso
+        medio del proprio periodo:
+
+              ³         Ml       ³
+              ³          ä Pi    ³
+              ³  Pj    i=ml      ³
+              ³ ÄÄÄÄ - ÄÄÄÄÄÄÄÄ  ³
+              ³  Aj      Ml      ³
+              ³           ä Ai   ³
+              ³         i=ml     ³                   l=2..7
+              ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ  <= 0.05          
+                      Ml                             j=ml..Ml
+                       ä Pi
+                     i=ml
+                    ÄÄÄÄÄÄÄÄ          
+                      Ml
+                       ä Ai
+                     i=ml
+
+        
+        Nota:   in tutti e tre i problemi si Š avuta la necessit…
+                di calcolare il tasso di produzione medio tra pi—     
+                settimane. Per definizione esso andrebbe calcolato non
+                come si Š fatto nel caso immediatamente precedente,
+                cio‚ come rapporto delle somme, ma andrebbe calcolato
+                come somma dei rapporti, cio‚ come tasso di produzione
+                medio tra i singoli tassi delle varie settimane.
+                In realt… Š evidente che nel caso in esame ha molto pi—
+                senso considerare, in tutto un periodo, il rapporto tra
+                tutti i motori che si sono effettivamente costruiti ed
+                il numero complessivo di giorni che tale produzione ha
+                richiesto.
+

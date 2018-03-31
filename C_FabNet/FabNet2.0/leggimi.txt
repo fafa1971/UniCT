@@ -1,0 +1,21 @@
+        *************************************************************
+        *************** FAB NET     di Fabrizio Fazzino *************
+        *************************************************************
+
+                FabNet - Simulatore di Reti di Calcolatori
+                con protocollo di accesso al mezzo fisico
+                mediante token (TokenBus, TokenRing, FDDI).
+
+        Per eseguire il simulatore lanciare il file FABNET.EXE .
+        
+        Il codice sorgente in linguaggio C Š contenuto nei due
+        file FABNET.C e INTRO.C .
+
+        Nella sottodirectory TESINA Š presente la tesina scritta
+        in formato MS-Works 3.0 per Windows: per leggerla come file
+        di Works Š necessario porre il file autoscompattante
+        TESINA.EXE nella directory MSWORKS ed eseguirlo; dopodich‚
+        si potr… aprire da Works il file di testo FABNET.WPS che 
+        contiene anche i collegamenti con le tabelle ed i grafici.
+
+

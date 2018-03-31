@@ -1,0 +1,334 @@
+
+
+
+		    PROBLEMA N.3  -  BLENDING DI CARBONE
+
+	      Gruppo n.8  ( Fabrizio Fazzino & Rosario Costanzo )
+
+
+	Il problema in questione viene commissionato da una societ… 
+	che si occupa di estrarre da alcune miniere del carbone per 
+	poi rivenderlo ad una seconda ditta, rispettando dei requisiti
+	sulla qualit… stessa del carbone riguardanti il suo potere 
+	calorico e le impurit… in esso presenti.
+
+	Alla ditta che acquista il carbone necessiterebbero 13'000 
+	tonnellate giornaliere, ma inizialmente la nostra societ…
+	estrae solo da una miniera (delle cinque che possiede) un
+	carbone che rispetti i requisiti di qualit… richiesti, e
+	da questa sola miniera l'estrazione giornaliera arriva
+	appena a 5'000 tonnellate.
+
+	Si pensa allora di miscelare il carbone estratto dalle altre
+	miniere con questo di qualit… migliore, cercando quindi di
+	aumentare la quantit… di carbone che pu• essere venduto
+	rispettando i vincoli sulla qualit…; ovviamente l'obiettivo
+	finale Š cercare di massimizzare il profitto della nostra
+	societ….
+
+	Le caratteristiche delle miniere sono presentate nella 
+	seguente tabella, in cui, dopo il numero e il nome della 
+	miniera (quella che inizialmente veniva sfruttata da sola 
+	Š la prima) compaiono il potere calorico del carbone (BTU= 
+	British Thermal Unit), le percentuali di impurit… presenti
+	(zolfo, cenere e umidit…), il costo di estrazione di una
+	tonnellata di carbone per ogni miniera ed infine la capacit…
+	di estrazione di ogni miniera:
+
+      ÚÄÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄÂÄÄÄÄÄÄÂÄÄÄÄÄÄÄÂÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÄÄÄ¿
+      ³ Miniera ³BTU/ton³%Zolfo³%Cenere³%Umid.³Costo/ton³Estraz.[ton]³
+      ÃÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÅÄÄÄÄÄÄÅÄÄÄÄÄÄÄÅÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄ´
+      ³ 1=Becky ³ 13'029³ 0.57 ³  5.56 ³  6.2 ³    81   ³    5'000   ³
+      ³ 2=Lex   ³ 14'201³ 0.88 ³  6.76 ³  5.1 ³    73   ³    4'000   ³
+      ³ 3=Casper³ 10'630³ 0.11 ³  4.36 ³  4.6 ³    90   ³    3'500   ³
+      ³ 4=Donora³ 13'200³ 0.71 ³  6.66 ³  7.6 ³    74   ³    3'000   ³
+      ³ 5=Rocky ³ 11'990³ 0.39 ³  4.40 ³  4.5 ³    89   ³    7'000   ³
+      ÀÄÄÄÄÄÄÄÄÄÁÄÄÄÄÄÄÄÁÄÄÄÄÄÄÁÄÄÄÄÄÄÄÁÄÄÄÄÄÄÁÄÄÄÄÄÄÄÄÄÁÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+	Invece le caratteristiche di qualit… che vengono richieste
+	dalla ditta alla nostra societ… sono quelle visualizzate nella 
+	seguente tabella, in cui compaiono pure il prezzo a cui il
+	nostro carbone (anche miscelato) viene venduto alla ditta
+	e la quantit… massima di carbone che la ditta Š disposta
+	ad acquistare:
+		
+	ÚÄÄÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÂÄÄÄÄÄÄÄÂÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÄÄÄ¿
+	³ BTU/ton  ³%Zolfo³%Cenere³%Umid.³Prezzo/ton³Estraz.[ton]³
+	ÃÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÅÄÄÄÄÄÄÄÅÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄ´
+	³ >=13'000 ³ <=0.6³ <=5.9 ³  <=7 ³    86    ³  <=13'000  ³
+	ÀÄÄÄÄÄÄÄÄÄÄÁÄÄÄÄÄÄÁÄÄÄÄÄÄÄÁÄÄÄÄÄÄÁÄÄÄÄÄÄÄÄÄÄÁÄÄÄÄÄÄÄÄÄÄÄÄÙ
+		
+	Come Š possibile vedere, l'unica miniera il cui carbone
+	soddisfa da solo tutte le richieste dell'acquirente Š la
+	prima, che viene gi… sfruttata a regime;
+	la nostra societ… cerca dunque di aumentare la quantit…
+	di carbone venduto dalle 5'000 tonnellate originarie che
+	la prima miniera pu• fornire fino ad un massimo di 13'000 
+	tonnellate, con l'obiettivo di rendere massimo il proprio 
+	profitto.
+
+
+			      MODELLIZZAZIONE
+					       
+	Variabili decisionali:
+		Si indicheranno X1 X2 X3 X4 X5 le quantit… di carbone
+		da estrarre giornalmente dalle cinque miniere per essere
+		miscelate tra loro ed essere cos vendute; si tratta 
+		ovviamente di variabili reali non negative.
+		
+		Si adotter… inoltre la convenzione (per l'impostazione
+		compatta del problema di programmazione lineare) di
+		indicare con Ci (i=1..5) i costi di estrazione (per 
+		tonnellata) dalle cinque miniere, e con C0 il prezzo 
+		unitario di vendita della miscela di carbone.
+
+		Gli altri elementi della matrice tecnologica saranno
+		inoltre denominati rispettivamente ZOLFOi, CENEREi,
+		UMIDi, mentre le massime quantit… estraibili saranno
+		chiamate ESTRAZi.
+
+		Per tutte le variabili e i coefficienti si adoperer…
+		sempre come indice i=1..5 per le cinque miniere.
+
+	Funzione Obiettivo:
+		Il profitto da massimizzare Š dato dalla differenza
+		tra il ricavato dalla vendita e i costi di estrazione
+		delle cinque quantit… di carbone dalle cinque miniere:
+			
+			f = C0*SUMi(Xi) - SUMi(Ci*Xi)           i=1..5
+	
+	Vincoli:
+		Bisogner… porre 4 vincoli sulla qualit… del prodotto
+		miscelato cos come sono state poste le richieste
+		dall'acquirente: 
+			
+			SUMi(Xi*BTUi) / SUMi(Xi)    >= 13000
+			SUMi(Xi*ZOLFOi) / SUMi(Xi)  <= 0.6
+			SUMi(Xi*CENEREi) / SUMi(Xi) <= 5.9
+			SUMi(Xi*UMIDi) / SUMi(Xi)   <= 7
+		
+		Si dovranno inoltre aggiungere dei vincoli sulla 
+		disponibilit… delle risorse affinch‚ ogni singola 
+		miniera non debba essere sfruttata pi— della capacit… 
+		massima di estrazione:
+			
+			Xi <= ESTRAZi       i=1..5
+
+		Infine la quantit… totale di carbone ceduta non deve 
+		superare la quantit… massima che pu• essere assorbita 
+		dall'acquirente:
+			
+			SUM(Xi) <= 13000    i=1..5
+
+
+			       RISOLUZIONE
+	
+	Prima di passare il problema al solutore di problemi di
+	programmazione lineare, Š opportuno operare alcune conversioni
+	di unit… di misura per evitare che i range di valori coperti
+	dai coefficienti della matrice tecnologica siano eccessivi.
+
+	I coefficienti variano infatti da 0.11 a 14'201; si preferisce
+	allora misurare i poteri calorici in KiloBTU/ton, e le capacit…
+	di estrazione delle varie miniere in Kiloton.
+	Con questo semplice accorgimento i coefficienti varieranno
+	da 0.11 a 90, cio‚ il rapporto tra il massimo e il minimo
+	Š stato diminuito da 129'100 a 818.
+	
+	Il problema cos formulato viene presentato al solutore 
+	nella seguente forma:
+	
+  MAX     5 X1 + 13 X2 - 4 X3 + 12 X4 - 3 X5
+  SUBJECT TO
+	 2)   0.029 X1 + 1.201 X2 - 2.37 X3 + 0.2 X4 - 1.01 X5 >=   0
+	 3) - 0.03 X1 + 0.28 X2 - 0.49 X3 + 0.11 X4 - 0.21 X5 <=   0
+	 4) - 0.34 X1 + 0.86 X2 - 1.54 X3 + 0.76 X4 - 1.5 X5 <=   0
+	 5) - 0.8 X1 - 1.9 X2 - 2.4 X3 + 0.6 X4 - 2.5 X5 <=   0
+	 6)   0.001 X1 + 0.001 X2 + 0.001 X3 + 0.001 X4 + 0.001 X5 <=   13
+	 7)   0.001 X1 <=   5
+	 8)   0.001 X2 <=   4
+	 9)   0.001 X3 <=   3.5
+	10)   0.001 X4 <=   3
+	11)   0.001 X5 <=   7
+  END
+	
+	La soluzione che il solutore fornisce per tale problema 
+	Š la seguente:
+	
+ LP OPTIMUM FOUND AT STEP      6
+
+	OBJECTIVE FUNCTION VALUE
+
+	1)     77686.910
+
+  VARIABLE        VALUE          REDUCED COST
+	X1      5000.000000           .000000
+	X2      4000.000000           .000000
+	X3      2153.596000           .000000
+	X4       775.108200           .000000
+	X5          .000000          1.094658
+
+
+       ROW   SLACK OR SURPLUS     DUAL PRICES
+	2)          .000000        -33.435780
+	3)          .000000        169.883200
+	4)       987.455000           .000000
+	5)     16303.560000           .000000
+	6)         1.071296           .000000
+	7)          .000000      11066.130000
+	8)          .000000       5589.061000
+	9)         1.346404           .000000
+       10)         2.224892           .000000
+       11)         7.000000           .000000
+
+ NO. ITERATIONS=       6
+
+	Come Š possibile vedere, la prima miniera viene sempre
+	sfruttata al massimo perch‚ Š indispensabile per aumentare
+	la qualit… del prodotto miscelato; anche la seconda miniera
+	viene sempre sfruttata al massimo (il vincolo Š saturato),
+	mentre la terza e la quarta vengono utilizzate solo
+	parzialmente e la quinta Š stata addirittura scartata dalla
+	soluzione.
+
+	Con questa soluzione il guadagno netto unitario, che prima 
+	del blending era di 5 $/ton (per complessive 5'000 tonnellate 
+	vendute) Š ora divenuto di 6.5 $/ton, ma soprattutto tale
+	guadagno va moltiplicato per tutte le 11'928 tonnellate
+	( SUM(Xi) ) che ora vengono vendute.
+
+	Il guadagno complessivo della nostra societ… passa cos dai
+	25'000 $ originari agli oltre 77'686 $ attuali.
+
+	L'analisi di sensitivit… fornisce i seguenti risultati:
+ 
+ RANGES IN WHICH THE BASIS IS UNCHANGED:
+ 
+			   OBJ COEFFICIENT RANGES
+ VARIABLE         CURRENT        ALLOWABLE        ALLOWABLE
+		   COEF          INCREASE         DECREASE
+       X1        5.000000         INFINITY        11.066130
+       X2       13.000000         INFINITY         5.589061
+       X3       -4.000000         INFINITY         2.577436
+       X4       12.000000        12.106780        11.102040
+       X5       -3.000000         1.094658         INFINITY 
+ 
+			   RIGHTHAND SIDE RANGES
+      ROW         CURRENT        ALLOWABLE        ALLOWABLE
+		    RHS          INCREASE         DECREASE
+	2         .000000       257.367500       290.499800
+	3         .000000        67.820950        53.211010
+	4         .000000         INFINITY       987.455000
+	5         .000000         INFINITY     16303.560000
+	6       13.000000         INFINITY         1.071296
+	7        5.000000          .677682         1.478257
+	8        4.000000         1.064752         4.000000
+	9        3.500000         INFINITY         1.346404
+       10        3.000000         INFINITY         2.224892
+       11        7.000000         INFINITY         7.000000
+
+	Una interessante variazione sullo stesso problema pu• essere 
+	fatta prendendo spunto da una frase ambigua presente nel testo
+	del problema, in cui si prospetta una soluzione ottima in cui
+	la nostra societ… riesce a vendere alla ditta acquirente tutte
+	le 13'000 tonnellate giornaliere di cui questa necessita.
+
+	Si pu• allora immediatamente calcolare la soluzione di un nuovo
+	problema in cui si impone dai vincoli che la quantit… totale di
+	carbone venduto non debba pi— essere come prima <= 13'000 
+	tonnellate, ma sia esattamente uguale:
+		
+		SUM(Xi) = 13000
+
+	In questo caso ovviamente il termine SUM(Xi) potrebbe essere        
+	eliminato dalla funzione obiettivo in quanto costante, ma si
+	preferisce lasciarlo per un duplice motivo: intanto per rendere
+	pi— semplice la modifica del problema ( Š immediato mutare un
+	segno <= in = ), ma soprattutto perch‚ cos i valori assunti
+	dalla funzione obiettivo nei due casi potranno essere
+	immediatamente confrontabili.
+	
+	Cambiando il vincolo il problema si riformula come segue:
+ 
+  MAX     5 X1 + 13 X2 - 4 X3 + 12 X4 - 3 X5
+  SUBJECT TO
+	 2)   0.029 X1 + 1.201 X2 - 2.37 X3 + 0.2 X4 - 1.01 X5 >=   0
+	 3) - 0.03 X1 + 0.28 X2 - 0.49 X3 + 0.11 X4 - 0.21 X5 <=   0
+	 4) - 0.34 X1 + 0.86 X2 - 1.54 X3 + 0.76 X4 - 1.5 X5 <=   0
+	 5) - 0.8 X1 - 1.9 X2 - 2.4 X3 + 0.6 X4 - 2.5 X5 <=   0
+	 6)   0.001 X1 + 0.001 X2 + 0.001 X3 + 0.001 X4 + 0.001 X5 =    13
+	 7)   0.001 X1 <=   5
+	 8)   0.001 X2 <=   4
+	 9)   0.001 X3 <=   3.5
+	10)   0.001 X4 <=   3
+	11)   0.001 X5 <=   7
+  END
+
+	La nuova soluzione ottenuta Š la seguente:
+ 
+ LP OPTIMUM FOUND AT STEP      5
+
+	OBJECTIVE FUNCTION VALUE
+
+	1)     75707.670    
+
+  VARIABLE        VALUE          REDUCED COST
+	X1      5000.000000           .000000
+	X2      4000.000000           .000000
+	X3      1385.685000           .000000
+	X4       806.224200           .000000
+	X5      1808.091000           .000000
+
+
+       ROW   SLACK OR SURPLUS     DUAL PRICES
+	2)          .000000        -40.248990
+	3)          .000000        199.066500
+	4)      2493.361000           .000000
+	5)     18962.130000           .000000
+	6)          .000000      -1847.516000
+	7)          .000000      13986.730000
+	8)          .000000       7447.933000
+	9)         2.114315           .000000
+       10)         2.193776           .000000
+       11)         5.191909           .000000
+
+ NO. ITERATIONS=       5
+
+ RANGES IN WHICH THE BASIS IS UNCHANGED:
+ 
+			   OBJ COEFFICIENT RANGES
+ VARIABLE         CURRENT        ALLOWABLE        ALLOWABLE
+		   COEF          INCREASE         DECREASE
+       X1        5.000000         INFINITY        13.986730
+       X2       13.000000         INFINITY         7.447934
+       X3       -4.000000         INFINITY         6.264007
+       X4       12.000000        15.172900        13.857140
+       X5       -3.000000         4.385952         INFINITY 
+ 
+			   RIGHTHAND SIDE RANGES
+      ROW         CURRENT        ALLOWABLE        ALLOWABLE
+		    RHS          INCREASE         DECREASE
+	2         .000000       277.571300       290.499800
+	3         .000000        67.820960        57.147030
+	4         .000000         INFINITY      2493.361000
+	5         .000000         INFINITY     18962.130000
+	6       13.000000         1.933139         1.071296
+	7        5.000000          .677682         1.164806
+	8        4.000000         1.064752         1.165416
+	9        3.500000         INFINITY         2.114315
+       10        3.000000         INFINITY         2.193776
+       11        7.000000         INFINITY         5.191909
+ 
+
+	Come ci si aspettava, restringendo un vincolo la soluzione
+	Š peggiorata: vendendo infatti tutte e 13'000 le tonnellate
+	di carbone di cui l'acquirente necessita, il profitto 
+	unitario si riduce a 5.82 $/ton, il che comporta un guadagno 
+	complessivo di 75'707 $, che Š inferiore a quello prospettato
+	dalla soluzione precedente di quasi 1000 $.
+
+	Cos come appare chiaro dal problema, allora, essendo il
+	guadagno della nostra societ… l'obiettivo da massimizzare,
+	appare chiaro che la soluzione migliore Š quella prospettata
+	nel primo caso, in cui il vincolo sulla quantit… di carbone
+	da vendere non Š saturato.

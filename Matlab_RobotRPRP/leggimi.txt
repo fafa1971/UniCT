@@ -1,0 +1,15 @@
+
+        SIMULAZIONE DEL CONTROLLO DI UN ROBOT A 4 LINK (R-P-R-P)
+
+        Per effettuare la simulazione bisogna eseguire il file
+        INIT.M dalla Command Window del Matlab.
+        
+        ( Eventualmente Š possibile modificare l'algoritmo di
+        controllo da Feedback Linearization a PD digitando:
+                Controllo='PD' )
+
+        Successivamente si acceda al Simulink e da esso si apra
+        il file SYSTEM.M, di cui si pu• infine eseguire la
+        simulazione.
+                                Fabrizio Fazzino
+

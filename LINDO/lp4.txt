@@ -1,0 +1,131 @@
+ 
+
+
+                    PROBLEMA N.4  -  COPERTURA DI INSIEMI
+
+            Gruppo n.8  ( Fabrizio Fazzino & Rosario Costanzo )
+
+  
+        Il problema nasce dalla necessit… di una associazione di dover 
+        richiedere dei fondi a molte persone per il rifinanziamento
+        delle casse comuni.
+        Le persone che si crede potranno rispondere all'appello fanno
+        capo a diversi gruppi; volendo raggiungerle tutte tramite
+        lettera, il metodo pi— semplice Š acquistare delle liste di
+        indirizzi, ognuna delle quali comprende gli indirizzi di uno
+        o pi— gruppi.
+        
+        Nel caso in questione, sono poste in vendita a prezzi differenti
+        8 liste di indirizzi, ognuna delle quali copre uno o pi— gruppi
+        dei 6 che bisogna contattare.
+        Nella tabella seguente Š indicata la cosiddetta "Matrice di
+        Copertura", in cui ogni coefficiente vale 0 o 1 a seconda che
+        la lista (sulla riga) copra o meno il gruppo corrispondente
+        (sulla colonna):
+                        
+                       ÚÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄ¿
+                       ³       ³   Gruppi  ³       ³
+                       ³ Liste ÃÄÂÄÂÄÂÄÂÄÂÄ´ Costi ³
+                       ³       ³1³2³3³4³5³6³       ³
+                       ÃÄÄÄÄÄÄÄÅÄÅÄÅÄÅÄÅÄÅÄÅÄÄÄÄÄÄÄ´
+                       ³   1   ³1³0³0³1³0³0³ 5'000 ³
+                       ³   2   ³0³1³1³0³0³0³ 4'000 ³
+                       ³   3   ³0³1³0³0³0³1³ 6'000 ³
+                       ³   4   ³1³0³0³0³0³1³ 4'750 ³
+                       ³   5   ³0³0³0³1³0³1³ 5'500 ³
+                       ³   6   ³0³0³1³0³0³0³ 3'000 ³
+                       ³   7   ³0³1³0³0³1³0³ 5'750 ³
+                       ³   8   ³1³0³0³0³1³0³ 5'250 ³
+                       ÀÄÄÄÄÄÄÄÁÄÁÄÁÄÁÄÁÄÁÄÁÄÄÄÄÄÄÄÙ
+
+        Si vogliono allora acquistare le liste necessarie per raggiungere 
+        tutte le persone facenti capo ai 6 gruppi; ovviamente l'obiettivo 
+        Š mantenere la spesa il pi— possibile bassa, non importa
+        quindi se un gruppo Š "coperto" da pi— di una delle liste
+        acquistate.
+   
+                            MODELLIZZAZIONE
+  
+        Variabili Decisionali:  
+                Per stabilire quali delle 8 liste acquistare per coprire
+                tutti i 6 insiemi con una spesa minima si definiscono
+                delle variabili booleane associate ad ogni lista, che
+                valgono 1 o 0 a seconda che la lista corrispondente
+                venga scelta o meno: tali variabili vengono indicate 
+                con Xi (i=1..8).
+
+                Per la formulazione compatta del problema si useranno
+                inoltre gli elementi della precedente matrice di
+                copertura indicati con Aij, dove gli indici individuano 
+                rispettivamente le liste (i=1..8) e i gruppi (j=1..6).
+                Sempre nella stessa tabella saranno inoltre indicati 
+                con Ci i costi delle varie liste.
+
+        Funzione Obiettivo:
+                Devo cercare di minimizzare la spesa relativa allo
+                acquisto delle liste necessarie per la copertura:
+                        f = SUMi(Ci*Xi)          i=1..8
+
+        Vincoli:
+                L'unico vincolo da imporre riguarda la copertura;
+                devo cio‚ garantire che ogni gruppo sia coperto da
+                almeno una lista:
+                        SUMi(Aij*Xi) >= 1       i=1..8,j=1..6      
+
+
+                              RISOLUZIONE
+
+        Tale problema deve essere posto al solutore in forma estesa,
+        avendo cura di specificare che le 8 variabili decisionali
+        devono essere di tipo booleano (INTE per il solutore):
+
+  MIN     5000 X1 + 4000 X2 + 6000 X3 + 4750 X4 + 5500 X5 + 3000 X6
+       + 5750 X7 + 5250 X8
+  SUBJECT TO
+         2)   X1 + X4 + X8 >=   1
+         3)   X2 + X3 + X7 >=   1
+         4)   X2 + X6 >=   1
+         5)   X1 + X5 >=   1
+         6)   X7 + X8 >=   1
+         7)   X3 + X4 + X5 >=   1
+  END
+  INTE     8
+ 
+        La soluzione fornita Š la seguente:
+
+        OBJECTIVE FUNCTION VALUE
+
+        1)     14750.000    
+
+  VARIABLE        VALUE          REDUCED COST
+        X1          .000000       5000.000000
+        X2         1.000000       4000.000000
+        X3          .000000       6000.000000
+        X4          .000000       4750.000000
+        X5         1.000000       5500.000000
+        X6          .000000       3000.000000
+        X7          .000000       5750.000000
+        X8         1.000000       5250.000000
+
+
+       ROW   SLACK OR SURPLUS     DUAL PRICES
+        2)          .000000           .000000
+        3)          .000000           .000000
+        4)          .000000           .000000
+        5)          .000000           .000000
+        6)          .000000           .000000
+        7)          .000000           .000000
+
+ NO. ITERATIONS=      11
+ BRANCHES=    0 DETERM.=  1.000E    0
+
+        Come si pu• vedere, basta acquistare le liste 2, 5 e 8 per
+        coprire tutti e 6 i gruppi di persone specificati; la spesa 
+        richiesta Š di 14'750 $.
+
+        Da notare che per un caso fortuito Š stato possibile scegliere
+        le liste in modo che nessun gruppo di persone fosse presente
+        2 volte; questa Š solo una coincidenza dovuta alla particolare
+        conformazione della matrice di copertura e ai prezzi delle liste,
+        ma non era stato in nessun modo richiesto dai vincoli del problema.
+

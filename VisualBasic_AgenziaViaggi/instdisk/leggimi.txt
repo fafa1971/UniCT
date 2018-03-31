@@ -1,0 +1,13 @@
+
+   Per installare il programma Agenzia di Viaggi operare come segue :
+
+  1)    Lanciare il file A:\INSTALL.BAT
+
+  2)    Dal Program Manager di Windows selezionare File - Apri 
+        per aggiungere il programma C:\VIAGGI\VIAGGI.EXE
+
+  3)    Selezionare Propriet… - Cambia Icona - Sfoglia e selezionare
+        la nuova icona C:\VIAGGI\VIAGGI.ICO
+
+  4)    Avviare il programma dal Program Manager
+
